@@ -52,6 +52,24 @@ import pytest
         ("post", "/api/wormhole/connect", {}),
         ("post", "/api/layers", {"layers": {"viirs_nightlights": True}}),
         ("post", "/api/ais/feed", {"msgs": []}),
+        # Added in post-#227 gap audit:
+        # /api/wormhole/join also calls bootstrap_wormhole_identity() — same
+        # identity-takeover surface as /identity/bootstrap. PR #227 hardened
+        # the latter but missed the former.
+        ("post", "/api/wormhole/join", {}),
+        # /api/sigint/transmit relays APRS-IS packets over radio using
+        # operator-supplied credentials. Any caller who reaches this endpoint
+        # could transmit on the operator's authority. Must be local-only.
+        (
+            "post",
+            "/api/sigint/transmit",
+            {
+                "callsign": "N0CALL",
+                "passcode": "12345",
+                "target": "NOCALL",
+                "message": "test",
+            },
+        ),
     ],
 )
 def test_remote_control_surface_rejects_without_local_operator_or_admin(

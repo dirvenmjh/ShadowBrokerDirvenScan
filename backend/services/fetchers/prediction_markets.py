@@ -25,6 +25,16 @@ _provider_pace_lock = threading.Lock()
 _provider_last_request_at: dict[str, float] = {}
 
 
+def prediction_markets_fetch_enabled() -> bool:
+    """Return True only when the operator explicitly opts into Polymarket/Kalshi pulls."""
+    return str(os.environ.get("PREDICTION_MARKETS_ENABLED", "")).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
+
 def _pace_provider(provider: str, min_interval_s: float) -> None:
     if min_interval_s <= 0:
         return
@@ -754,6 +764,16 @@ def fetch_prediction_markets():
     """Fetcher entry point — writes merged markets to latest_data."""
     from services.fetchers._store import latest_data, _data_lock, _mark_fresh
     global _prev_probabilities
+
+    if not prediction_markets_fetch_enabled():
+        logger.debug(
+            "Prediction markets fetch skipped; set "
+            "PREDICTION_MARKETS_ENABLED=true to opt in"
+        )
+        with _data_lock:
+            latest_data["prediction_markets"] = []
+        _mark_fresh("prediction_markets")
+        return
 
     markets = fetch_prediction_markets_raw()
 

@@ -24,11 +24,7 @@ _AIRPORTS_URL = "https://vrs-standing-data.adsb.lol/airports.csv.gz"
 _REFRESH_INTERVAL_S = 5 * 24 * 3600
 _HTTP_TIMEOUT_S = 60
 
-_USER_AGENT = (
-    "ShadowBroker-OSINT/0.9.79 "
-    "(+https://github.com/BigBodyCobain/Shadowbroker; "
-    "contact: bigbodycobain@gmail.com)"
-)
+from services.network_utils import DEFAULT_USER_AGENT as _USER_AGENT
 
 _lock = threading.RLock()
 _routes_by_callsign: dict[str, dict[str, Any]] = {}

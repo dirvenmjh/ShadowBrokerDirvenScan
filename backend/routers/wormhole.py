@@ -589,7 +589,7 @@ async def api_get_wormhole_status(request: Request):
     )
 
 
-@router.post("/api/wormhole/join")
+@router.post("/api/wormhole/join", dependencies=[Depends(require_local_operator)])
 @limiter.limit("10/minute")
 async def api_wormhole_join(request: Request):
     from services.config import get_settings

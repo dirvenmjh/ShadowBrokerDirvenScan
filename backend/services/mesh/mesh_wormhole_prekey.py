@@ -228,11 +228,15 @@ def _fetch_dm_prekey_bundle_from_public_lookup(lookup_token: str) -> dict[str, A
         normalized_peer_url = str(peer_url or "").strip().rstrip("/")
         if not normalized_peer_url:
             continue
+        # Generic UA: any peer-facing crypto request should not carry a
+        # fork-specific identifier — that turns prekey lookups into a
+        # software-fingerprinting beacon.
+        from services.network_utils import DEFAULT_USER_AGENT
         request = urllib.request.Request(
             f"{normalized_peer_url}/api/mesh/dm/prekey-bundle?{encoded}",
             headers={
                 "Accept": "application/json",
-                "User-Agent": "ShadowBroker-Infonet/0.9 (+https://github.com/BigBodyCobain/Shadowbroker)",
+                "User-Agent": DEFAULT_USER_AGENT,
             },
             method="GET",
         )

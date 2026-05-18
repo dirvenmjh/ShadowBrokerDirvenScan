@@ -49,6 +49,16 @@ _HF_CSV_URL = (
     "https://huggingface.co/datasets/kcimc/NUFORC/resolve/main/nuforc_str.csv"
 )
 
+
+def nuforc_fetch_enabled() -> bool:
+    """Return True only when the operator explicitly opts into NUFORC pulls."""
+    return str(os.environ.get("NUFORC_ENABLED", "")).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
 # Only keep sightings from the last N years for the enrichment index
 _KEEP_YEARS = 5
 
@@ -160,6 +170,12 @@ def _download_and_build() -> dict | None:
 
     Returns the index dict or None on failure.
     """
+    if not nuforc_fetch_enabled():
+        logger.debug(
+            "NUFORC enrichment skipped; set NUFORC_ENABLED=true to opt in"
+        )
+        return None
+
     cutoff = datetime.utcnow() - timedelta(days=_KEEP_YEARS * 365)
     cutoff_str = cutoff.strftime("%Y-%m-%d")
 

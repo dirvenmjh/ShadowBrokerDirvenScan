@@ -5,6 +5,7 @@ debunked claims, threat actor mentions, and target country references.
 Refreshes every 12 hours (FIMI data updates weekly).
 """
 
+import os
 import re
 import logging
 from datetime import datetime, timezone
@@ -17,6 +18,16 @@ from services.fetchers.retry import with_retry
 logger = logging.getLogger("services.data_fetcher")
 
 _FIMI_FEED_URL = "https://euvsdisinfo.eu/feed/"
+
+
+def fimi_fetch_enabled() -> bool:
+    """Return True only when the operator explicitly opts into FIMI pulls."""
+    return str(os.environ.get("FIMI_ENABLED", "")).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
 
 # ── Threat actor keywords ──────────────────────────────────────────────────
 # Map of keyword → canonical actor name.  Checked case-insensitively.
@@ -173,6 +184,12 @@ def _is_major_wave(narratives: list[dict], targets: dict[str, int]) -> bool:
 @with_retry(max_retries=1, base_delay=5)
 def fetch_fimi():
     """Fetch and parse the EUvsDisinfo RSS feed."""
+    if not fimi_fetch_enabled():
+        logger.debug("FIMI fetch skipped; set FIMI_ENABLED=true to opt in")
+        with _data_lock:
+            latest_data["fimi"] = []
+        _mark_fresh("fimi")
+        return
     try:
         resp = fetch_with_curl(_FIMI_FEED_URL, timeout=15)
         feed = feedparser.parse(resp.text)

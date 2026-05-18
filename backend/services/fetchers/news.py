@@ -1,4 +1,5 @@
 """News fetching, geocoding, clustering, and risk assessment."""
+import os
 import re
 import time
 import logging
@@ -10,6 +11,22 @@ from services.network_utils import fetch_with_curl
 from services.fetchers._store import latest_data, _data_lock, _mark_fresh
 from services.fetchers.retry import with_retry
 from services.oracle_service import enrich_news_items, compute_global_threat_level, detect_breaking_events
+
+
+def news_fetch_enabled() -> bool:
+    """Return True only when the operator explicitly opts into news RSS pulls.
+
+    Defaults to **on** for backward compatibility (this is the only fetcher
+    where opting out is the new behavior, not the old one). Set
+    ``NEWS_ENABLED=false`` to disable all outbound RSS feed traffic.
+    """
+    return str(os.environ.get("NEWS_ENABLED", "true")).strip().lower() not in {
+        "0",
+        "false",
+        "no",
+        "off",
+        "",
+    }
 
 logger = logging.getLogger("services.data_fetcher")
 
@@ -160,6 +177,12 @@ def _resolve_coords(text: str) -> tuple[float, float] | None:
 
 @with_retry(max_retries=1, base_delay=2)
 def fetch_news():
+    if not news_fetch_enabled():
+        logger.debug("News fetch skipped; unset NEWS_ENABLED=false to re-enable")
+        with _data_lock:
+            latest_data["news"] = []
+        _mark_fresh("news")
+        return
     from services.news_feed_config import get_feeds
     feed_config = get_feeds()
     feeds = {f["name"]: f["url"] for f in feed_config}

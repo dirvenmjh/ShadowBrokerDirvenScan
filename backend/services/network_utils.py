@@ -19,6 +19,17 @@ _retry = Retry(total=1, backoff_factor=0.3, status_forcelist=[502, 503, 504])
 _session.mount("https://", HTTPAdapter(max_retries=_retry, pool_maxsize=20))
 _session.mount("http://", HTTPAdapter(max_retries=_retry, pool_maxsize=10))
 
+
+# Default outbound User-Agent. Generic by design — does NOT include any
+# personal contact info or a fork-specific repo URL. Operators who run a
+# public-facing relay and want to identify themselves to upstreams (e.g.
+# for Nominatim / weather.gov usage-policy compliance) can override this
+# via the SHADOWBROKER_USER_AGENT env var.
+DEFAULT_USER_AGENT = os.environ.get(
+    "SHADOWBROKER_USER_AGENT",
+    "ShadowBroker-OSINT/0.9",
+)
+
 # Find bash for curl fallback — Git bash's curl has the TLS features
 # needed to pass CDN fingerprint checks (brotli, zstd, libpsl)
 
@@ -73,7 +84,7 @@ def fetch_with_curl(url, method="GET", json_data=None, timeout=15, headers=None,
     both Python requests and the barebones Windows system curl.
     """
     default_headers = {
-        "User-Agent": "ShadowBroker-OSINT/0.9.79 (+https://github.com/BigBodyCobain/Shadowbroker; contact: bigbodycobain@gmail.com)",
+        "User-Agent": DEFAULT_USER_AGENT,
     }
     if headers:
         default_headers.update(headers)

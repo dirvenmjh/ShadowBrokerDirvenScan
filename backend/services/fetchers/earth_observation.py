@@ -279,9 +279,13 @@ def fetch_weather_alerts():
         return
     alerts = []
     try:
+        # weather.gov requires a User-Agent per their API policy, but it
+        # need not identify the operator. Use a project-generic string and
+        # let the user override via SHADOWBROKER_USER_AGENT if needed.
+        from services.network_utils import DEFAULT_USER_AGENT
         url = "https://api.weather.gov/alerts/active?status=actual"
         headers = {
-            "User-Agent": "(ShadowBroker OSINT Dashboard, github.com/BigBodyCobain/Shadowbroker)",
+            "User-Agent": DEFAULT_USER_AGENT,
             "Accept": "application/geo+json",
         }
         response = fetch_with_curl(url, timeout=15, headers=headers)

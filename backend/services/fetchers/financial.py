@@ -82,10 +82,37 @@ def _fetch_yfinance_single(symbol: str, period: str = "2d"):
 
 
 @with_retry(max_retries=1, base_delay=1)
+def financial_fetch_enabled() -> bool:
+    """Return True only when the operator explicitly opts into financial pulls.
+
+    Either ``FINANCIAL_ENABLED=true`` or the presence of ``FINNHUB_API_KEY``
+    counts as an explicit opt-in. Without either, the default yfinance path
+    is disabled to avoid silent outbound calls to finance.yahoo.com.
+    """
+    if os.getenv("FINNHUB_API_KEY", "").strip():
+        return True
+    return str(os.environ.get("FINANCIAL_ENABLED", "")).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
+
 def fetch_financial_markets():
     """Fetches full market list with smart throttling (3s for Finnhub, 60s for yfinance)."""
     global _last_fetch_time, _last_fetch_results, _rotating_index
-    
+
+    if not financial_fetch_enabled():
+        logger.debug(
+            "Financial fetch skipped; set FINANCIAL_ENABLED=true or supply "
+            "FINNHUB_API_KEY to opt in"
+        )
+        with _data_lock:
+            latest_data["financial"] = {}
+        _mark_fresh("financial")
+        return
+
     finnhub_key = os.getenv("FINNHUB_API_KEY", "").strip()
     use_finnhub = bool(finnhub_key)
     
