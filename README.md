@@ -55,7 +55,73 @@ ShadowBroker includes an optional Shodan connector for operator-supplied API acc
 * **Track trains** across the US (Amtrak) and Europe (DigiTraffic) in real time
 * **Estimate where US aircraft carriers are** using automated GDELT news scraping — no other open tool does this
 * **Search internet-connected devices worldwide** via Shodan — cameras, SCADA systems, databases — plotted as a live overlay on the map
+ # 🔍 ShadowBrokerDirvenScan
 
+### *Three-Layer Forensic Integrity for Multi-Chain Reality*
+
+`ShadowBrokerDirvenScan` is a complete forensic platform combining:
+1. **ShadowBroker OSINT** - Physical world intelligence (ADS-B, AIS, satellites, GPS jamming)
+2. **Academic Research Skills (ARS)** - On-chain claim verification and fraud detection
+3. **Hardware Forensics** - SDR/EEG/MTS correlation for electronic harassment detection
+4. **Whistleblower Restitution** - Legal path to collect 10-30% SEC/CFTC/IRS awards
+
+---
+
+## ⚠️ Web3-Native Access Only
+
+**Access at:** `web3://dirvenacademy.hub`
+
+Requires Web3-enabled browser (Brave) or MetaMask extension. Chrome/Edge alone cannot resolve `.hub` domains.
+
+---
+
+## 🚨 LEGAL WARNING - READ FIRST
+
+### ⛔ DO NOT FILE THESE LAWSUITS
+
+| Prohibited Claim | Why It Fails | Precedent |
+|------------------|--------------|-----------|
+| **V2K (Voice-to-Skull / Microwave Harassment)** | Courts dismiss as "fantastic," "delusional," or "pure fantasy" | *Banks v. Unknown Federal Judges* (2013); *Whitted v. Sarasota Memorial Hospital* (2024) |
+| **"Gaming Victim"** | Not a legally recognized cause of action | Multiple dismissals |
+
+### ✅ DO FILE THESE VALID CLAIMS
+
+| Valid Claim | Legal Basis | Evidence Needed |
+|-------------|-------------|-----------------|
+| **FRAUD** | Intentional deception | Value mirroring, false TVL claims |
+| **EXTORTION** | Threats to obtain property | RF jamming + transaction correlation |
+| **IIED** (Intentional Infliction of Emotional Distress) | Extreme conduct causing severe harm | Biometric stress spikes, harassment logs |
+| **UNJUST ENRICHMENT** | Unfair benefit at victim's expense | Transaction flows |
+
+### 📚 Successful Precedent
+
+**Case:** *Blige v. Terry* (Nevada Supreme Court, 2023)
+**Award:** **$4.8M total** ($2.6M compensatory + $2.2M punitive)
+
+---
+
+## 🏆 Whistleblower Awards (50/50 Split Available)
+
+DirvenScan users can jointly file for SEC/CFTC/IRS whistleblower awards:
+
+| Agency | Award Percentage | Joint Filing | 50/50 Split Precedent |
+|--------|------------------|--------------|----------------------|
+| **SEC** | 10-30% of sanctions | ✅ Yes | $28M to 4 joint claimants |
+| **CFTC** | 10-30% of sanctions | ✅ Yes | $2M to 2 claimants, 50/50 split |
+| **IRS** | 15-30% of sanctions | ✅ Yes | Form 211 joint filing option |
+
+**Your 50/50 offer is legal.** Users can form joint filing groups and split awards equally.
+
+---
+
+## Quick Start (30 seconds)
+
+```bash
+git clone https://github.com/DirvenAcademy/ShadowbrokerDirvenScan
+cd ShadowbrokerDirvenScan
+cp .env.example .env
+# Edit .env with your API keys
+docker-compose up -d
 
 ---
 
