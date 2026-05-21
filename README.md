@@ -141,6 +141,19 @@ These are **analytical frameworks for understanding on-chain fraud patterns.** T
 
 ## XMR (Monero) Tracing Methods (Educational Reference)
 
+### 🛠️ Forensic Analysis Tool
+
+`xmr_forensics.py` is an analytical tool included in this repository designed to detect artificial value inflation on EVM-compatible chains. It uses signature pattern matching for:
+- Self-transactions
+- Oracle manipulation
+- Artificial value inflation
+- Synthetic bridge events
+
+**Usage:**
+```bash
+python openclaw-skills/shadowbroker/xmr_forensics.py --rpc http://localhost:8545 --start 3000 --end 3003
+```
+
 ### What Academic Research Shows
 
 Monero's privacy features make tracing difficult but not impossible:
