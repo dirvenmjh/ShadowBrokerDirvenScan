@@ -28,6 +28,31 @@
 
 ---
 
+## 🚨 ADDITIONAL LEGAL WARNING
+
+### ⛔ DO NOT FILE THESE LAWSUITS
+
+| Prohibited Claim | Why It Fails | Precedent |
+|------------------|--------------|-----------|
+| **V2K (Voice-to-Skull / Microwave Harassment)** | Courts dismiss as "fantastic," "delusional," or "pure fantasy" | *Banks v. Unknown Federal Judges* (2013); *Whitted v. Sarasota Memorial Hospital* (2024) |
+| **"Gaming Victim"** | Not a legally recognized cause of action | Multiple dismissals |
+
+### ✅ DO FILE THESE VALID CLAIMS
+
+| Valid Claim | Legal Basis | Precedent |
+|-------------|-------------|-----------|
+| **FRAUD** | Intentional deception | *Blige v. Terry* |
+| **EXTORTION** | Threats to obtain property | *Smietana v. Stephens* |
+| **IIED** (Intentional Infliction of Emotional Distress) | Extreme conduct causing severe harm | *Blige v. Terry* ($4.8M) |
+
+### 📚 Successful Precedent
+
+**Case:** *Blige v. Terry* (Nevada Supreme Court, 2023)
+**Award:** **$4.8M total** ($2.6M compensatory + $2.2M punitive)
+**Claims:** Extortion, IIED, Civil Conspiracy
+
+---
+
 ### ✅ VALID FRAUD CLAIMS (With Supporting Evidence)
 
 | Valid Legal Claim | Legal Basis | Required Evidence |

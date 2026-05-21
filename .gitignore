@@ -180,6 +180,8 @@ graphify-out/
 # Internal docs & brainstorming (never commit)
 # ========================
 docs/*
+!docs/WHISTLEBLOWER_GUIDE.md
+!docs/LEGAL_GUIDANCE.md
 !docs/mesh/
 docs/mesh/*
 !docs/mesh/threat-model.md

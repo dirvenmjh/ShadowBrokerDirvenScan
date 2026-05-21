@@ -1018,6 +1018,13 @@ export default function Dashboard() {
           </ErrorBoundary>
         </motion.div>
 
+        {/* LEGAL DISCLAIMER (ALWAYS VISIBLE) */}
+        <footer className="absolute -bottom-6 left-0 right-0 z-[7999] h-6 flex items-center justify-center bg-black/70 backdrop-blur-sm border-t border-cyan-900/30 px-4">
+          <span className="text-[7px] font-mono tracking-[0.1em] text-cyan-700/50 text-center leading-tight">
+            ⚠️ LEGAL DISCLAIMER: DirvenScan does NOT file whistleblower claims automatically. Users must file manually through SEC/CFTC/IRS portals. False statements are perjury (18 U.S.C. § 1621). V2K lawsuits are dismissed as &quot;fantastic or delusional.&quot; DO NOT FILE. File IIED/Extortion/Fraud instead (Blige v. Terry precedent). Awards NOT guaranteed. Consult an attorney. DirvenScan takes no portion of any award. 🔍 ShadowBrokerDirvenScan | 🌐 web3://dirvenacademy.hub
+          </span>
+        </footer>
+
       </main>
     </>
   );
